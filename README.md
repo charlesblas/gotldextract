@@ -9,7 +9,7 @@ A Go library and command-line tool for extracting the top-level domain (TLD), do
 - Handles URLs with protocols, ports, and paths
 - Uses the Mozilla Public Suffix List for accurate TLD detection
 - Command-line tool with support for stdin/stdout piping
-- JSON output format option
+- JSON and CSV output format options
 - Automatic public suffix list updates
 
 ## Installation
@@ -72,6 +72,9 @@ tldextract -file domains.txt
 # Output as JSON
 tldextract -json example.com
 
+# Output as CSV
+tldextract -csv example.com www.github.com
+
 # Update the public suffix list
 tldextract -update
 
@@ -83,6 +86,7 @@ cat domains.txt | tldextract > extracted.txt
 
 - `-update`: Update the public suffix list
 - `-json`: Output results as JSON
+- `-csv`: Output results as CSV
 - `-file`: Read from file instead of stdin
 - `-help`: Show help message
 
@@ -98,6 +102,14 @@ example.com
 ```bash
 $ tldextract -json https://api.example.co.uk
 {"input":"https://api.example.co.uk","subdomain":"api","domain":"example","tld":"co.uk","fqdn":"api.example.co.uk"}
+```
+
+### CSV output
+```bash
+$ tldextract -csv example.com www.github.com
+input,subdomain,domain,tld,fqdn
+example.com,,example,com,example.com
+www.github.com,www,github,com,www.github.com
 ```
 
 ### Batch processing
